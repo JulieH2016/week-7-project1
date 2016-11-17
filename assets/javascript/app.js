@@ -67,5 +67,14 @@ function initMap() {
         // refresh and expect more data
         return false;
 
+    // Close out the onClick for the Go button
     });
+
+// Close out the initMap function
+}
+
+// This function builds and the map using the latitude,
+// longitude, and venue type passed to it from the initMap function
+function buildMap(latitude, longitude, venue) {
+
 }
