@@ -40,6 +40,11 @@
 	<!-- Link to the app javascript -->
 	<script type="text/javascript" src="assets/javascript/app.js"></script>
 
+	<!-- Link to Google Maps API - required to put it here - cannot be called via normal ajax method -->
+	<!-- This creates a google maps object then calls the initMap function in app.js -->
+	<!-- Required to do it this way per Google Maps API documentation -->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU&libraries=places&callback=initMap"></script>
+
 </body>
 
 </html>
