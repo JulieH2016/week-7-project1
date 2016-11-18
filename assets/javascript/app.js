@@ -59,18 +59,21 @@ function initMap() {
                     // And also issuing an alert - which we can remove later in development
                     // and handle it in a nicer way
                     alert("Please use valid location");
+
+                // End of the if/else
                 }
-                
+        
+        // End of the ajax call to the Google Maps Geocoding API       
         });
 
         // We also want to issue a return false so that the form doesn't instantly
         // refresh and expect more data
         return false;
 
-    // Close out the onClick for the Go button
+    // End of the onClick for the Go button
     });
 
-// Close out the initMap function
+// End of the initMap function
 }
 
 // buildMap function builds and the map using the latitude,
@@ -96,6 +99,8 @@ function buildMap(latitude, longitude, venue) {
         // determined by trial and error and level of 10 was found
         // to be acceptable for this app's needs.
         zoom: 10
+
+    // End of the map declaration
     });
 
     // Much of the code below came from the Google API documents
@@ -130,7 +135,36 @@ function buildMap(latitude, longitude, venue) {
         // developers.google.com/places/supported_types
         type: [venue]
 
-        // The nearbySearch function appears to get a callback function which much be run
-        // and will be defined separately
-        }, callback);
+    // The nearbySearch function appears to get a callback function which much be run
+    // and will be defined separately
+    }, callback);
+
+// End of the buildMap function    
+}
+
+// This is the callback function that was referenced in the service.nearbySearch function
+// call that was made within the buildMap function. Again, this code was taken from the Google
+// Maps Places (Web) Service. This function appears to receive results and status. Status
+// confirms that the call was correctly made and executed, while results contains the 
+// points of interest that were found.
+function callback(results, status) {
+
+    // Verify that the status was returned as "OK" 
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+
+        // If status is indeed okay, that means there are POIs available in result
+        // so iterate over the arrays of points of interest being held within result
+        for (var i = 0; i < results.length; i++) {
+
+            // For each point of interest, create a marker on the map. createMarker
+            // is a function that will be separately defined outside of this function.
+            createMarker(results[i]);
+
+        // End of the iteration loop
+        }
+
+    // End of the the if statement 
+    }
+
+// End of the callback function    
 }
