@@ -11,7 +11,9 @@ function initMap() {
         // This is accomplished by making an ajax call to the Google Maps Geocoding API
         
         // The information we need to send includes the location the user entered
-        var location = $("#location").val();
+        // and remember to trim the user's input to remove dead space on either
+        // side of value
+        var location = $("#location").val().trim();
         
         // We also need the venue type the user selected as we will later send it to 
         // the function that builds the map
