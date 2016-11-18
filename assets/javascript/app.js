@@ -158,6 +158,8 @@ function callback(results, status) {
 
             // For each point of interest, create a marker on the map. createMarker
             // is a function that will be separately defined outside of this function.
+            // That function is sent a particular point of interest object pulled from
+            // the results array
             createMarker(results[i]);
 
         // End of the iteration loop
@@ -167,4 +169,57 @@ function callback(results, status) {
     }
 
 // End of the callback function    
+}
+
+// The createMarker function is called from the earlier callback function. The
+// purpose of this function is to create and place a marker on the map for the
+// particular point of interest (place object) it receives
+function createMarker(place) {
+
+    // The location of the place is extracted from the place object. It exists
+    // under .geometry.location of the place object
+    var placeLoc = place.geometry.location;
+
+    // A new marker is created and it is provided an object that contains the map
+    // we are working with, and the position/location of the point of interest/place
+    // that we are working with
+    var marker = new google.maps.Marker({
+
+        // This is our map that we want to place markers upon
+        map: map,
+
+        // And this is the position we are sending to it, with is the location
+        // of the point of interest/place that we extracted earlier
+        position: placeLoc
+
+    // End of the marker object definition
+    });
+
+    // After creating the marker, we also want a listener on the marker
+    // so that when someone clicks on a marker we can both identify the
+    // marker and also pass its information out to functions that will
+    // in turn display images for that location
+    google.maps.event.addListener(marker, 'click', function() {
+
+        // When the marker is clicked, we want to define what
+        // we plan to display as the name of that particular
+        // point of interest / place, by pulling it from within
+        // the place object
+        infowindow.setContent(place.name);
+
+        // Next we want to display the information on the map using
+        // information related to "this" (whatever marker user clicked)
+        infowindow.open(map, this);
+
+        // Finally here is our opportunity to pass infmormation out to
+        // functions that will take over and get images that are to be
+        // displayed. For now we are just passing the name of the 
+        // place / point of interest. Explore how to pass other information
+        // later.
+        getImages(place.name);
+
+    // End of the listener on the markers
+    });
+
+// End of the createMarker function
 }
