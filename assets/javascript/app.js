@@ -213,13 +213,49 @@ function createMarker(place) {
 
         // Finally here is our opportunity to pass infmormation out to
         // functions that will take over and get images that are to be
-        // displayed. For now we are just passing the name of the 
-        // place / point of interest. Explore how to pass other information
-        // later.
+        // displayed. Pass out the entire place object and extract
+        // its information in the getImages function as needed
         getImages(place.name);
 
     // End of the listener on the markers
     });
 
 // End of the createMarker function
+}
+
+// This is the getImages function. For now this is just a dummy function
+// with limited functionality. Later it will get fleshed out and actually
+// make calls to get images for the #images div. It receives information about
+// the point of interest/place marker that the user had clicked on
+function getImages(somePlace) {
+
+    // For testing, let's log the received data to the console
+    // First the place object itself
+    console.log("getImages function received place: ");
+    // Had to separate the variable out or console truncates when you + it
+    console.log(somePlace);
+
+    // Next the name of the place
+    console.log("name: " + somePlace.name);
+
+    // Next the address of the place
+    console.log("address: " + somePlace.vicinity);
+
+    // Next the min latitude for viewport
+    console.log("latitude min: " + somePlace.geometry.viewport.f.b);
+
+    // Next the max latitude for viewport
+    console.log("latitude max: " + somePlace.geometry.viewport.f.f);
+
+    // Next the min longitude for viewport
+    console.log("longitude min: " + somePlace.geometry.viewport.b.b);
+
+    // Next the max longitude for viewport
+    console.log("longitude max: " + somePlace.geometry.viewport.b.f);
+
+    // For now place some text in the #images div so that we can
+    // see that the location is being passed
+    $("#images").html("get images of " + somePlace);
+
+// End of the getImages function
 }
