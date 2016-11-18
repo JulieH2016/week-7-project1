@@ -1,4 +1,4 @@
-// This function is called first by the Google Maps object generated in index.html
+// initMap function is called first by the Google Maps object generated in index.html
 function initMap() {
 
     // we want to begin when user has entered a location and clicks the Go button
@@ -73,8 +73,64 @@ function initMap() {
 // Close out the initMap function
 }
 
-// This function builds and the map using the latitude,
+// buildMap function builds and the map using the latitude,
 // longitude, and venue type passed to it from the initMap function
 function buildMap(latitude, longitude, venue) {
 
+    // Google Maps Map API requires that it be fed an object
+    // containing latitude and longitude. Create this
+    // object and pass in the latitude and longitude this
+    // function received
+    var locationCenter = {lat: latitude, lng: longitude};
+
+    // Create a new map in the #map div defined in index.html
+    map = new google.maps.Map(document.getElementById('map'), {
+
+        // Center the map on the locationCenter object containing
+        // the latitude and longitude of the location the user entered
+        // which was calculated in the initMap function using the Google
+        // Maps Geocoding API and passed to this buildMap function
+        center: locationCenter,
+
+        // The map also requires a zoom level to be set. This was
+        // determined by trial and error and level of 10 was found
+        // to be acceptable for this app's needs.
+        zoom: 10
+    });
+
+    // Much of the code below came from the Google API documents
+    // but best as I understand it, infowindow is an infowindow
+    // object that is a new instance of an InfoWindow defined in
+    // the Google Maps Map API
+    infowindow = new google.maps.InfoWindow();
+
+    // Service appears to leverage the Google Maps Places (Web) Service
+    // and creates a new instance of it on the previously declared map
+    var service = new google.maps.places.PlacesService(map);
+
+    // Service appears to have a nearbySearch function that requires that
+    // it be fed the location latitude, longitude, venue type, and radius
+    // to search from the location.
+    service.nearbySearch({
+
+        // location is once again going to be the previously determined location
+        // object containing the latitude and longitude
+        location: locationCenter,
+
+        // radius is defined in meters in the Google Maps Places (Web) Service
+        // and by trial and error 30,000m was found to be a good radius. This is
+        // roughly 18.5 miles radius and seems to turn up a reasonable amount of
+        // venues.
+        radius: 30000,
+
+        // type required refers to venue type, and this is provided as an object to
+        // the Google Maps Places (Web) Service. Venue was selected by the user
+        // from a drop down menu, passed to the initMaps function, which then passed it
+        // to this buildMap function. Supported venue options are available at:
+        // developers.google.com/places/supported_types
+        type: [venue]
+
+        // The nearbySearch function appears to get a callback function which much be run
+        // and will be defined separately
+        }, callback);
 }
