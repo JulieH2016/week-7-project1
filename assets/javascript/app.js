@@ -44,6 +44,9 @@ function initMap() {
                 // If location was valid then set the lat/lng
                 if (response.status === "OK") {
 
+                    // save the location to local storage
+                    saveLocation(location);
+
                     // Set the latitude and logitude by retreiving from the response object
                     var latitude = response.results[0].geometry.location.lat;
                     var longitude = response.results[0].geometry.location.lng;
@@ -270,3 +273,4 @@ function getImages(somePlace) {
 
 // End of the getImages function
 }
+
