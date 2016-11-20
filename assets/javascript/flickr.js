@@ -42,7 +42,7 @@ function grabThumbnails (locationClick){
 			clearThumbnailsArea();
 
 			// display a reload images button first by generating its HTML
-			var reloadButtonHTML = '<button type="submit" class="btn btn-danger" id="reloadButton">RELOAD!</button>'
+			var reloadButtonHTML = '<button type="submit" class="btn btn-danger" id="reloadButton">SHOW ME MORE!</button>'
 			
 			// then placing it within the reloadButtonDiv
 			$("#reloadButtonDiv").html(reloadButtonHTML);
