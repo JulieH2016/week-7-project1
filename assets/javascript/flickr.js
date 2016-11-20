@@ -1,3 +1,9 @@
+// Set up two global variables that will be used in multiple functions
+// globalName will hold the name of the particular point of interest
+// that the user clicked on, while globalVicinity will hold its address
+var globalName;
+var globalVicinity;
+
 // Function to generate thumbnails of images at a location
 // makes ajax call to Flickr API
 function grabThumbnails (locationClick){
@@ -71,30 +77,57 @@ function grabThumbnails (locationClick){
 
 function displaySixThumbnails(imagesAvailable, response) {
 	// for our random starting point in the array of images returned 
-			// by the flickr API, select a ranom number between 0 and images
-			// available - 7. We subtract by 7 instead of 6 to account for index #
-			var number = Math.floor((Math.random() * (imagesAvailable-7)) + 0);   	
+	// by the flickr API, select a ranom number between 0 and images
+	// available - 7. We subtract by 7 instead of 6 to account for index #
+	var number = Math.floor((Math.random() * (imagesAvailable-7)) + 0);   	
 
-			// run a loop starting from index number of the first image and
-			// continue for 6 iterations, using the i index. Additionally,
-			// have a j index variable that will be used to generate the
-			// ID of the div we will target to display the image. The divs
-			// have IDs of #image1, #image2, .... #image6
-			for (var i=number, j=1; i<number+6; i++, j++) {
+	// run a loop starting from index number of the first image and
+	// continue for 6 iterations, using the i index. Additionally,
+	// have a j index variable that will be used to generate the
+	// ID of the div we will target to display the image. The divs
+	// have IDs of #image1, #image2, .... #image6
+	for (var i=number, j=1; i<number+6; i++, j++) {
 
-				// define the image type using the jquery call to the img tag
-				var imgDisplay = $('<img>');
+		// define the image type using the jquery call to the img tag
+		var imgDisplay = $('<img>');
 
-				// Give the image a src attribute pulled from the API object
-				imgDisplay.attr('src', response.photos.photo[i].url_q);
+		// Give the image a data attribute of the thumbnail size image url
+		imgDisplay.attr('data-thumbnail', response.photos.photo[i].url_q);
 
-				// display the thumbnail image into the div by targeting the div's ID
-				$('#image'+j).html(imgDisplay);
+		// Give the image a data attribute of the full size image url
+		imgDisplay.attr('data-fullsize', response.photos.photo[i].url_z);
 
-			// end of the for loop
-			};
+		// Give the image a src attribute pulled from the API object
+		imgDisplay.attr('src', response.photos.photo[i].url_q);
+
+		// Give the image a common class that can be used for the onClick function
+		imgDisplay.addClass("myShowImage");
+
+		// display the thumbnail image into the div by targeting the div's ID
+		$('#image'+j).html(imgDisplay);
+
+	// end of the for loop
+	};
+
+	// create a listener for the 6 images we just drew
+	$(".myShowImage").on("click", function() {
+
+		// for testing lets make sure url attributes are available
+		console.log($(this).attr("data-thumbnail"));
+		console.log($(this).attr("data-fullsize"));
+
+		// call the function that begins the modal display
+		// we will need to send it the full size image URL
+
+		drawModal($(this).attr("data-fullsize"));
+
+	// end of the listener on the thumbnails
+	});
+
+// end of the displaySixThumbnails function			
 }
 
+// function that clears out the Thumbnails area
 function clearThumbnailsArea() {
 
 	// empty out all 6 div spots where images go as well as reloadButtonDiv
@@ -105,4 +138,11 @@ function clearThumbnailsArea() {
 	$("#image5").empty();
 	$("#image6").empty();
 	$("#reloadButtonDiv").empty();
+}
+
+// function that draws the modal and receives URL of image to display
+function drawModal(receivedURL) {
+
+	// test to make sure URL or image to display was received
+	console.log("received URL: " + receivedURL);
 }
