@@ -121,7 +121,29 @@ function displaySixThumbnails(imagesAvailable, response) {
 		drawModal($(this).attr("data-fullsize"));
 
 		// display the modal
+		// first enter the name and address in the title
 		$('#myModalLabel').text(globalName + ", " + globalVicinity);
+
+		// populate the content area with the larger version of the image
+		$("#myModalContent").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" alt="localtion image">');
+
+		// Now add in the miniMap built with the Google Static Maps API
+		// first the Google APIs key
+		var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+	    // location needs to be url escaped for calls
+	    var urlEscapedLocation = encodeURIComponent(globalVicinity);
+	    console.log("urlEscapedLocation is: " + urlEscapedLocation);
+	    // name needs to be url escaped for calls
+	    var urlEscapedName = encodeURIComponent(globalName);
+	    console.log("urlEscapedName is: " + urlEscapedName);
+	    // build the marker location as "name,address"
+	    var marker = urlEscapedName + "," + urlEscapedLocation;
+	    // Now build the URL for the API call
+	    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=hybrid&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
+	    // and let's place the map in the modal
+	    $("#myModalContent").append("<br><img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
+
+		// finally make the modal visible
 		$('#myModal').modal('show');
 
 	// end of the listener on the thumbnails
