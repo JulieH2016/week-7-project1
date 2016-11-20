@@ -33,54 +33,63 @@ function initMap() {
         // For testing, let's log the requestURL
         console.log("requestURL generated in initMap function: " + requestURL);
 
-        // Now make the ajax call to get the geo object so we can get lat/lng for location
-        $.ajax({url: requestURL, method: "GET"}).done(function(response) {
-                
-                // Let's see what the call returned
-                console.log("ajax call to geocoding API in initMap function returned: " + response);
+        // only make ajax request if there is actually content in the input location field
+        if (location !== "") {
 
-                // If the location was valid, the returned object will have a .status of "OK"
-                // Let's check for that to confirm location and set the latitude and longitude
-                // If location was valid then set the lat/lng
-                if (response.status === "OK") {
+            // Now make the ajax call to get the geo object so we can get lat/lng for location
+            $.ajax({url: requestURL, method: "GET"}).done(function(response) {
+                    
+                    // Let's see what the call returned
+                    console.log("ajax call to geocoding API in initMap function returned: " + response);
 
-                    // save the location to local storage
-                    saveLocation(location);
+                    // If the location was valid, the returned object will have a .status of "OK"
+                    // Let's check for that to confirm location and set the latitude and longitude
+                    // If location was valid then set the lat/lng
+                    if (response.status === "OK") {
 
-                    // Set the latitude and logitude by retreiving from the response object
-                    var latitude = response.results[0].geometry.location.lat;
-                    var longitude = response.results[0].geometry.location.lng;
+                        // save the location to local storage
+                        saveLocation(location);
 
-                    // Let's log out the latitude and longitude for testing
-                    console.log("From initMap function, latitude: " + latitude + " longitude: " + longitude);
+                        // Set the latitude and logitude by retreiving from the response object
+                        var latitude = response.results[0].geometry.location.lat;
+                        var longitude = response.results[0].geometry.location.lng;
 
-                    // clear out the prior thumbnails
-                    clearThumbnailsArea();
+                        // Let's log out the latitude and longitude for testing
+                        console.log("From initMap function, latitude: " + latitude + " longitude: " + longitude);
 
-                    // Now that we have the latitude and longitude and venue type
-                    // Let's call the buildMap function so we can display a map
-                    // Along with points of interestes of the venue type
-                    // Do this by passing these three values to the buildMap function
-                    buildMap(latitude, longitude, venue);
+                        // clear out the prior thumbnails
+                        clearThumbnailsArea();
 
-                } else {
+                        // Now that we have the latitude and longitude and venue type
+                        // Let's call the buildMap function so we can display a map
+                        // Along with points of interestes of the venue type
+                        // Do this by passing these three values to the buildMap function
+                        buildMap(latitude, longitude, venue);
 
-                    // If the user didn't enter a valid location, let's catch that first
-                    // by console logging it out
-                    console.log("incorrect location");
+                    } else {
 
-                    // And also issuing an alert - which we can remove later in development
-                    // and handle it in a nicer way
-                    // alert("Please use valid location");
+                        // If the user didn't enter a valid location, let's catch that first
+                        // by console logging it out
+                        console.log("incorrect location");
 
-                    // Display the modal showing invalid locatin entered
-                    $('#badLocationModal').modal('show');
+                        // Display the modal showing invalid locatin entered
+                        $('#badLocationModal').modal('show');
 
-                // End of the if/else
-                }
-        
-        // End of the ajax call to the Google Maps Geocoding API       
-        });
+                    // End of the if/else
+                    }
+            
+            // End of the ajax call to the Google Maps Geocoding API       
+            });
+
+        } else {
+
+            // the location field must be empty so console log that
+            console.log("empty location");
+
+            // Display the modal showing invalid locatin entered
+            $('#badLocationModal').modal('show');
+
+        }
 
         // We also want to issue a return false so that the form doesn't instantly
         // refresh and expect more data
