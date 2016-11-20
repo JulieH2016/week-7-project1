@@ -1,4 +1,16 @@
 #map {
-    height: 400px;
+    height: 300px;
     width: 800px;
+}
+
+.form-inline {
+	margin-bottom: 20px;
+}
+
+#map {
+	margin-bottom: 20px;
+}
+
+.myShowImage {
+	margin-bottom: 20px;
 }
