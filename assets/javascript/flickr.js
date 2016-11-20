@@ -12,7 +12,7 @@ function grabThumbnails (locationClick){
 	var userInput = locationClick;
 
 	// set up the Flickr API key
-	var apiKey = 'f7d55bffd8b0ca3e7df8269a986d2d1d';
+	var apiKey = '8f7799f4500510037138500c6216fecd';
 
 	// generate the Flickr ajax call url
 	var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + apiKey + '&tags=' + userInput + '&privacy_filter=1&safe_search=1&content_type=1&extras=url_q%2C+url_z&per_page=100&format=json&nojsoncallback=1';
@@ -118,8 +118,11 @@ function displaySixThumbnails(imagesAvailable, response) {
 
 		// call the function that begins the modal display
 		// we will need to send it the full size image URL
-
 		drawModal($(this).attr("data-fullsize"));
+
+		// display the modal
+		$('#myModalLabel').text(globalName + ", " + globalVicinity);
+		$('#myModal').modal('show');
 
 	// end of the listener on the thumbnails
 	});

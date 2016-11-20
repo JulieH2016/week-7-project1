@@ -1,11 +1,11 @@
+/*
+
 $('img').on('click',function()
 	{
 		var imagesource=$(this).attr('src'); 
 		$('#modalimg').attr('src',imagesource);
 		$('#myModal').modal('show');
 });
-
-/*
 
 		<div class="row">
 
