@@ -68,7 +68,10 @@ function initMap() {
 
                     // And also issuing an alert - which we can remove later in development
                     // and handle it in a nicer way
-                    alert("Please use valid location");
+                    // alert("Please use valid location");
+
+                    // Display the modal showing invalid locatin entered
+                    $('#badLocationModal').modal('show');
 
                 // End of the if/else
                 }
