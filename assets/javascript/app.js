@@ -23,7 +23,29 @@ function initMap() {
         // We also need the venue type the user selected as we will later send it to 
         // the function that builds the map
         var venue = $("#venue").val();
-        
+
+        // Google API call requires specific name types.
+        // Supported are: amusement_park, art_gallery, museum, park, zoo
+        // switch venue user selected to API supported type
+
+        switch (venue) {
+            case "Amusement Park":
+                venue = "amusement_park";
+                break;
+            case "Art Gallery":
+                venue = "art_gallery";
+                break;
+            case "Museum":
+                venue = "museum";
+                break;
+            case "Park":
+                venue = "park";
+                break;
+            case "Zoo":
+                venue = "zoo";
+                break;
+        }
+
         // We need our Google Developer Key to make the ajax call
         var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
 
