@@ -4,6 +4,38 @@
 var globalName;
 var globalVicinity;
 
+// function to save valid user locations
+function saveLocation(receivedLocation) {
+
+	// if we have no prior stored locations, then begin by pre-defining 5 locations
+	if (localStorage.getItem("project1location1") === null) {
+		localStorage.setItem("project1location5", "Orlando, FL");
+		localStorage.setItem("project1location4", "New York, NY");
+		localStorage.setItem("project1location3", "Los Angeles, CA");
+		localStorage.setItem("project1location2", "Washington, DC");
+		localStorage.setItem("project1location1", "Toronto, Ontario");
+	} 
+
+	// if the location passed in isn't already stored, then store it
+	if ((receivedLocation !== localStorage.getItem("project1location1")) && (receivedLocation !== localStorage.getItem("project1location2")) && (receivedLocation !== localStorage.getItem("project1location3")) && (receivedLocation !== localStorage.getItem("project1location4")) && (receivedLocation !== localStorage.getItem("project1location5")) ) {
+			// move stored position 4 to 5, 3 to 4, 2 to 3, 1 to 2, and new location in 1
+			localStorage.setItem("project1location5", localStorage.getItem("project1location4"));
+			localStorage.setItem("project1location4", localStorage.getItem("project1location3"));
+			localStorage.setItem("project1location3", localStorage.getItem("project1location2"));
+			localStorage.setItem("project1location2", localStorage.getItem("project1location1"));
+			localStorage.setItem("project1location1", receivedLocation);
+	}
+
+    $("#savedLocations").html('<option value="' + localStorage.getItem("project1location1") + '">' + '<option value="' + localStorage.getItem("project1location2") + '">' + '<option value="' + localStorage.getItem("project1location3") + '">' + '<option value="' + localStorage.getItem("project1location4") + '">' + '<option value="' + localStorage.getItem("project1location5") + '">');
+
+}
+
+// run the saveLocation function once to establish some local storage locations
+saveLocation("Orlando, FL");
+
+// for testing, line below allows clearing out local storage. Uncomment and re-run if needed.
+// localStorage.clear();
+
 // Function to generate thumbnails of images at a location
 // makes ajax call to Flickr API
 function grabThumbnails (locationClick){
