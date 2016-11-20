@@ -1,6 +1,11 @@
 // initMap function is called first by the Google Maps object generated in index.html
 function initMap() {
 
+    // add a listener for the reset button that reloads the site
+    $("#resetButton").on("click", function() {
+        location.href=location.href;
+    });
+
     // we want to begin when user has entered a location and clicks the Go button
     $("#goButton").on("click", function() {
 
@@ -250,6 +255,7 @@ function getImages(somePlace) {
 
     // Now get the actual images
     // using the grabThumbnails function in flickr.js
+    // send the request as URL escaped string
     grabThumbnails(encodeURIComponent(somePlace.name));
 
 // End of the getImages function

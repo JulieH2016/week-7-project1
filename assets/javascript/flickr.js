@@ -28,7 +28,9 @@ function grabThumbnails (locationClick){
 		imagesAvailable = response.photos.photo.length;
 
 		// we only want to display thumbnails if there are at least 6 images available
-		if (imagesAvailable > 6) {
+		// and the location wasn't "None". Google's API sometimes returns false positive
+		// of "None" which will then generate unrelated flickr images
+		if (imagesAvailable>6 && locationClick!="None") {
 
 			// begin by clearing the thumbnails area
 			clearThumbnailsArea();
