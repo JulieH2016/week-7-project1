@@ -84,6 +84,8 @@ function buildMap(latitude, longitude, venue) {
 
     // first remove the logo
     $("#logoImageDiv").empty();
+    // and replace it with a smaller title
+    $("#titleDiv").html('<div class="alert alert-danger text-center" role="alert"><h1>Oh, The Places We Will Go!</h1></div>');
 
     // Google Maps Map API requires that it be fed an object
     // containing latitude and longitude. Create this
