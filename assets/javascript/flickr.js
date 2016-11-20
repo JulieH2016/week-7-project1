@@ -125,7 +125,7 @@ function displaySixThumbnails(imagesAvailable, response) {
 		$('#myModalLabel').text(globalName + ", " + globalVicinity);
 
 		// populate the content area with the larger version of the image
-		$("#myModalContent").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" alt="localtion image">');
+		$("#myModalPOIImage").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" alt="localtion image">');
 
 		// Now add in the miniMap built with the Google Static Maps API
 		// first the Google APIs key
@@ -141,7 +141,10 @@ function displaySixThumbnails(imagesAvailable, response) {
 	    // Now build the URL for the API call
 	    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=hybrid&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
 	    // and let's place the map in the modal
-	    $("#myModalContent").append("<br><img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
+	    $("#myModalMapImage").html("<img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
+
+	    // display the weather image
+	    $("#myModalWeatherInfo").html("Weather or Social Media goes here");
 
 		// finally make the modal visible
 		$('#myModal').modal('show');
