@@ -217,7 +217,7 @@ function createMarker(place) {
         // functions that will take over and get images that are to be
         // displayed. Pass out the entire place object and extract
         // its information in the getImages function as needed
-        getImages(place.name);
+        getImages(place);
 
     // End of the listener on the markers
     });
@@ -243,21 +243,9 @@ function getImages(somePlace) {
     // Next the address of the place
     console.log("address: " + somePlace.vicinity);
 
-    // Next the min latitude for viewport
-    console.log("latitude min: " + somePlace.geometry.viewport.f.b);
-
-    // Next the max latitude for viewport
-    console.log("latitude max: " + somePlace.geometry.viewport.f.f);
-
-    // Next the min longitude for viewport
-    console.log("longitude min: " + somePlace.geometry.viewport.b.b);
-
-    // Next the max longitude for viewport
-    console.log("longitude max: " + somePlace.geometry.viewport.b.f);
-
-    // For now place some text in the #images div so that we can
-    // see that the location is being passed
-    $("#images").html("get images of " + somePlace);
+    // Now get the actual images
+    // using the grabThumbnails function in flickr.js
+    grabThumbnails(encodeURIComponent(somePlace.name));
 
 // End of the getImages function
 }
