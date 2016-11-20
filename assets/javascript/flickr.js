@@ -33,7 +33,42 @@ function grabThumbnails (locationClick){
 			// begin by clearing the thumbnails area
 			clearThumbnailsArea();
 
-			// for our random starting point in the array of images returned 
+			// display a reload images button first by generating its HTML
+			var reloadButtonHTML = '<button type="submit" class="btn btn-danger" id="reloadButton">RELOAD!</button>'
+			
+			// then placing it within the reloadButtonDiv
+			$("#reloadButtonDiv").html(reloadButtonHTML);
+
+			// create an listener on the reload button
+			$("#reloadButton").on("click", function() {
+
+				// when reload button is pressed, reload thumbnail images
+				displaySixThumbnails(imagesAvailable, response);
+
+			});
+
+			// display the 6 thumbnails
+			displaySixThumbnails(imagesAvailable, response);
+
+		// end of the if imagesAvailable >6 loop
+		} else {
+
+			// but if there aren't 6 images available, instead display a
+			// no images available thumbnail
+			clearThumbnailsArea();
+			var imgDisplay = $('<img>');
+			imgDisplay.attr('src', "assets/images/NoImageThumbnail.jpg");
+			$('#image1').html(imgDisplay);
+		}
+
+	// end of the ajax call
+	}); 
+
+// end of the grabThumbnails function
+};
+
+function displaySixThumbnails(imagesAvailable, response) {
+	// for our random starting point in the array of images returned 
 			// by the flickr API, select a ranom number between 0 and images
 			// available - 7. We subtract by 7 instead of 6 to account for index #
 			var number = Math.floor((Math.random() * (imagesAvailable-7)) + 0);   	
@@ -56,31 +91,16 @@ function grabThumbnails (locationClick){
 
 			// end of the for loop
 			};
-
-		// end of the if imagesAvailable >6 loop
-		} else {
-
-			// but if there aren't 6 images available, instead display a
-			// no images available thumbnail
-			clearThumbnailsArea();
-			var imgDisplay = $('<img>');
-			imgDisplay.attr('src', "assets/images/NoImageThumbnail.jpg");
-			$('#image1').html(imgDisplay);
-		}
-
-	// end of the ajax call
-	}); 
-
-// end of the grabThumbnails function
-};
+}
 
 function clearThumbnailsArea() {
 
-	// empty out all 6 div spots where images go
+	// empty out all 6 div spots where images go as well as reloadButtonDiv
 	$("#image1").empty();
 	$("#image2").empty();
 	$("#image3").empty();
 	$("#image4").empty();
 	$("#image5").empty();
 	$("#image6").empty();
+	$("#reloadButtonDiv").empty();
 }
