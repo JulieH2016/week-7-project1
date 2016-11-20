@@ -116,10 +116,6 @@ function displaySixThumbnails(imagesAvailable, response) {
 		console.log($(this).attr("data-thumbnail"));
 		console.log($(this).attr("data-fullsize"));
 
-		// call the function that begins the modal display
-		// we will need to send it the full size image URL
-		drawModal($(this).attr("data-fullsize"));
-
 		// display the modal
 		// first enter the name and address in the title
 		$('#myModalLabel').text(globalName + ", " + globalVicinity);
@@ -139,7 +135,7 @@ function displaySixThumbnails(imagesAvailable, response) {
 	    // build the marker location as "name,address"
 	    var marker = urlEscapedName + "," + urlEscapedLocation;
 	    // Now build the URL for the API call
-	    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=hybrid&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
+	    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=roadmap&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
 	    // and let's place the map in the modal
 	    $("#myModalMapImage").html("<img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
 
@@ -166,11 +162,4 @@ function clearThumbnailsArea() {
 	$("#image5").empty();
 	$("#image6").empty();
 	$("#reloadButtonDiv").empty();
-}
-
-// function that draws the modal and receives URL of image to display
-function drawModal(receivedURL) {
-
-	// test to make sure URL or image to display was received
-	console.log("received URL: " + receivedURL);
 }
