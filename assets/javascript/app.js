@@ -249,13 +249,13 @@ function getImages(somePlace) {
 
     // Next the name of the place
     console.log("name: " + somePlace.name);
-    // and store its URL escaped version in the global variable globalName
-    globalName = encodeURIComponent(somePlace.name);
+    // and store it in the global variable globalName
+    globalName = somePlace.name;
 
     // Next the address of the place
     console.log("address: " + somePlace.vicinity);
-    // and store its URL escaped version in the global variable globalVicinity
-    globalVicinity = encodeURIComponent(somePlace.vicinity);
+    // and store it in the global variable globalVicinity
+    globalVicinity = somePlace.vicinity;
 
     // Now get the actual images
     // using the grabThumbnails function in flickr.js

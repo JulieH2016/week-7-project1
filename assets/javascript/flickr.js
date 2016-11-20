@@ -12,7 +12,7 @@ function grabThumbnails (locationClick){
 	var userInput = locationClick;
 
 	// set up the Flickr API key
-	var apiKey = 'f7d55bffd8b0ca3e7df8269a986d2d1d';
+	var apiKey = '8f7799f4500510037138500c6216fecd';
 
 	// generate the Flickr ajax call url
 	var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + apiKey + '&tags=' + userInput + '&privacy_filter=1&safe_search=1&content_type=1&extras=url_q%2C+url_z&per_page=100&format=json&nojsoncallback=1';
@@ -118,8 +118,36 @@ function displaySixThumbnails(imagesAvailable, response) {
 
 		// call the function that begins the modal display
 		// we will need to send it the full size image URL
-
 		drawModal($(this).attr("data-fullsize"));
+
+		// display the modal
+		// first enter the name and address in the title
+		$('#myModalLabel').text(globalName + ", " + globalVicinity);
+
+		// populate the content area with the larger version of the image
+		$("#myModalPOIImage").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" alt="localtion image">');
+
+		// Now add in the miniMap built with the Google Static Maps API
+		// first the Google APIs key
+		var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+	    // location needs to be url escaped for calls
+	    var urlEscapedLocation = encodeURIComponent(globalVicinity);
+	    console.log("urlEscapedLocation is: " + urlEscapedLocation);
+	    // name needs to be url escaped for calls
+	    var urlEscapedName = encodeURIComponent(globalName);
+	    console.log("urlEscapedName is: " + urlEscapedName);
+	    // build the marker location as "name,address"
+	    var marker = urlEscapedName + "," + urlEscapedLocation;
+	    // Now build the URL for the API call
+	    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=hybrid&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
+	    // and let's place the map in the modal
+	    $("#myModalMapImage").html("<img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
+
+	    // display the weather image
+	    $("#myModalWeatherInfo").html("Weather or Social Media goes here");
+
+		// finally make the modal visible
+		$('#myModal').modal('show');
 
 	// end of the listener on the thumbnails
 	});
