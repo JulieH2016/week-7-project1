@@ -1,6 +1,11 @@
 // initMap function is called first by the Google Maps object generated in index.html
 function initMap() {
 
+    // add a listener for the reset button that reloads the site
+    $("#resetButton").on("click", function() {
+        location.href=location.href;
+    });
+
     // we want to begin when user has entered a location and clicks the Go button
     $("#goButton").on("click", function() {
 
@@ -84,6 +89,8 @@ function buildMap(latitude, longitude, venue) {
 
     // first remove the logo
     $("#logoImageDiv").empty();
+    // and replace it with a smaller title
+    $("#titleDiv").html('<div class="alert alert-danger text-center" role="alert"><h1>Oh, The Places We Will Go!</h1></div>');
 
     // Google Maps Map API requires that it be fed an object
     // containing latitude and longitude. Create this
@@ -248,6 +255,7 @@ function getImages(somePlace) {
 
     // Now get the actual images
     // using the grabThumbnails function in flickr.js
+    // send the request as URL escaped string
     grabThumbnails(encodeURIComponent(somePlace.name));
 
 // End of the getImages function

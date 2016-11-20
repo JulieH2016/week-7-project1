@@ -33,10 +33,13 @@
 	<!-- begin the bootstrap container -->
 	<div class="container">
 
-		<!-- header / title -->
-		<!-- <div class="page-header"> -->
-  			<!-- <h1>Oh, The Places We Will Go!<small></small></h1> -->
-		<!-- </div> -->
+		<!-- title - will be populated later via JS when logo disappears after location is selected -->
+		<div class="row">
+			<div class="col-md-12" id="titleDiv">
+				<!-- The following line of HTML code is what will be inserted via JS -->
+				<!-- <div class="alert alert-danger text-center" role="alert"><h1>Oh, The Places We Will Go!</h1></div> -->
+			</div>
+		</div>
 
 		<!-- begin by having logo displayed -->
 		<div class="row">
@@ -49,20 +52,20 @@
 			<div class="row">
 
 				<!-- location and venue div -->
-				<div class="col-md-12">
+				<div class="col-md-12 text-center">
 
 					<!-- begin our form-->
 					<form class="form-inline">
 
 						<!-- first input is for the location -->
 			  			<div class="form-group">
-			    			<label for="location">Location:</label>
+			    			<label for="location">Location: </label>
 			    			<input type="text" class="form-control" id="location" placeholder="City, State">
 			  			</div>
 
 						<!-- second input is for the venue type -->
 			  			<div class="form-group">
-		    				<label for="venue">Venue:</label>
+		    				<label for="venue"> Venue: </label>
 			   				<select class="form-control" id="venue">
 			   					<option>amusement_park</option>
 			   					<option>art_gallery</option>
