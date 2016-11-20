@@ -51,6 +51,9 @@ function initMap() {
                     // Let's log out the latitude and longitude for testing
                     console.log("From initMap function, latitude: " + latitude + " longitude: " + longitude);
 
+                    // clear out the prior thumbnails
+                    clearThumbnailsArea();
+
                     // Now that we have the latitude and longitude and venue type
                     // Let's call the buildMap function so we can display a map
                     // Along with points of interestes of the venue type
