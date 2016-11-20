@@ -82,6 +82,9 @@ function initMap() {
 // longitude, and venue type passed to it from the initMap function
 function buildMap(latitude, longitude, venue) {
 
+    // first remove the logo
+    $("#logoImageDiv").empty();
+
     // Google Maps Map API requires that it be fed an object
     // containing latitude and longitude. Create this
     // object and pass in the latitude and longitude this
