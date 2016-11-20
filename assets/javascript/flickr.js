@@ -27,32 +27,60 @@ function grabThumbnails (locationClick){
 		// set up a variable that is the number of available images
 		imagesAvailable = response.photos.photo.length;
 
-		// for our random starting point in the array of images returned 
-		// by the flickr API, select a ranom number between 0 and images
-		// available - 7. We subtract by 7 instead of 6 to account for index #
-		var number = Math.floor((Math.random() * (imagesAvailable-7)) + 0);   	
+		// we only want to display thumbnails if there are at least 6 images available
+		if (imagesAvailable > 6) {
 
-		// run a loop starting from index number of the first image and
-		// continue for 6 iterations, using the i index. Additionally,
-		// have a j index variable that will be used to generate the
-		// ID of the div we will target to display the image. The divs
-		// have IDs of #image1, #image2, .... #image6
-		for (var i=number, j=1; i<number+6; i++, j++) {
+			// begin by clearing the thumbnails area
+			clearThumbnailsArea();
 
-			// define the image type using the jquery call to the img tag
+			// for our random starting point in the array of images returned 
+			// by the flickr API, select a ranom number between 0 and images
+			// available - 7. We subtract by 7 instead of 6 to account for index #
+			var number = Math.floor((Math.random() * (imagesAvailable-7)) + 0);   	
+
+			// run a loop starting from index number of the first image and
+			// continue for 6 iterations, using the i index. Additionally,
+			// have a j index variable that will be used to generate the
+			// ID of the div we will target to display the image. The divs
+			// have IDs of #image1, #image2, .... #image6
+			for (var i=number, j=1; i<number+6; i++, j++) {
+
+				// define the image type using the jquery call to the img tag
+				var imgDisplay = $('<img>');
+
+				// Give the image a src attribute pulled from the API object
+				imgDisplay.attr('src', response.photos.photo[i].url_q);
+
+				// display the thumbnail image into the div by targeting the div's ID
+				$('#image'+j).html(imgDisplay);
+
+			// end of the for loop
+			};
+
+		// end of the if imagesAvailable >6 loop
+		} else {
+
+			// but if there aren't 6 images available, instead display a
+			// no images available thumbnail
+			clearThumbnailsArea();
 			var imgDisplay = $('<img>');
-
-			// Give the image a src attribute pulled from the API object
-			imgDisplay.attr('src', response.photos.photo[i].url_q);
-
-			// display the thumbnail image into the div by targeting the div's ID
-			$('#image'+j).html(imgDisplay);
-
-		// end of the for loop
-		};
+			imgDisplay.attr('src', "assets/images/NoImageThumbnail.jpg");
+			$('#image1').html(imgDisplay);
+		}
 
 	// end of the ajax call
 	}); 
 
 // end of the grabThumbnails function
 };
+
+function clearThumbnailsArea() {
+
+	// empty out all 6 div spots where images go
+	$("#image1").empty();
+	$("#image2").empty();
+	$("#image3").empty();
+	$("#image4").empty();
+	$("#image5").empty();
+	$("#image6").empty();
+}
