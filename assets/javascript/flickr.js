@@ -4,6 +4,11 @@
 var globalName;
 var globalVicinity;
 
+// set up two global location related variables for use in multiple functions
+// they hold the latitude and longitude returned by the Google Maps geocoding API
+var globalLatitude = 0;
+var globalLongitude = 0;
+
 // function to save valid user locations
 function saveLocation(receivedLocation) {
 
@@ -194,4 +199,34 @@ function clearThumbnailsArea() {
 	$("#image5").empty();
 	$("#image6").empty();
 	$("#reloadButtonDiv").empty();
+}
+
+// getWeather function makes call to Weather Underground API
+// and fills in information on the modal that appears when a photo
+// is clicked. Doing it this way minimizes calls to the API, which
+// permits no more than 10 calls per minute, 500 calls per day
+// Weather info is only needed after user has seen photos because
+// that is the determining factor on whether they wish to visit that location
+function getWeather() {
+
+	// Define the Weather Underground API Key
+	var APIKey = "cd425eda92edbd2d";
+
+	// Here we are building the URL we need to query the API for the forecast
+	var queryURL = "http://api.wunderground.com/api/cd425eda92edbd2d/forecast/q/" + globalLatitude + "," + globalLongitude + ".json";
+
+
+	$.ajax({
+  		url : queryURL,
+		dataType : "jsonp",
+		success : function(parsed_json) {
+			console.log(parsed_json);
+			for (var n = 0; n < 6; n++) {
+				// $("#fc" + n).html(parsed_json.forecast.txt_forecast.forecastday[n].title + " " + parsed_json.forecast.txt_forecast.forecastday[n].fcttext + " " + "<img src='" + parsed_json.forecast.txt_forecast.forecastday[n].icon_url + "' alt='icon'>");
+				$("#iconPeriod" + n).html("<img src='" + parsed_json.forecast.txt_forecast.forecastday[n].icon_url + "' alt='icon'>");
+				$("#textPeriod" + n).html("<strong>" + parsed_json.forecast.txt_forecast.forecastday[n].title + "</strong><br>" + parsed_json.forecast.txt_forecast.forecastday[n].fcttext);
+			}
+  		}
+  	});
+
 }
