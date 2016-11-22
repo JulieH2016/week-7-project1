@@ -290,6 +290,10 @@ function getImages(somePlace) {
     // Had to separate the variable out or console truncates when you + it
     console.log(somePlace);
 
+    // Set the POI's latitude and logitude for later use on modal for mini map
+    globalPOILatitude = somePlace.geometry.location.lat(this);
+    globalPOILongitude = somePlace.geometry.location.lng(this);
+
     // Next the name of the place
     console.log("name: " + somePlace.name);
     // and store it in the global variable globalName
