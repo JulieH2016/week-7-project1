@@ -222,8 +222,15 @@ function getWeather() {
 		success : function(parsed_json) {
 			console.log(parsed_json);
 			for (var n = 0; n < 6; n++) {
+				// icon url is returned by the object as an http request but heroku
+				// requires http. Let's conver it. First, save the icon URL in a temp var
+				var tempIconURL = parsed_json.forecast.txt_forecast.forecastday[n].icon_url;
+
+				// then convert the http portion to https
+				var finalIconURL = tempIconURL.replace(/^http:\/\//i, 'https://');
+
 				// $("#fc" + n).html(parsed_json.forecast.txt_forecast.forecastday[n].title + " " + parsed_json.forecast.txt_forecast.forecastday[n].fcttext + " " + "<img src='" + parsed_json.forecast.txt_forecast.forecastday[n].icon_url + "' alt='icon'>");
-				$("#iconPeriod" + n).html("<img src='" + parsed_json.forecast.txt_forecast.forecastday[n].icon_url + "' alt='icon'>");
+				$("#iconPeriod" + n).html("<img src='" + finalIconURL + "' alt='icon'>");
 				$("#textPeriod" + n).html("<strong>" + parsed_json.forecast.txt_forecast.forecastday[n].title + "</strong><br>" + parsed_json.forecast.txt_forecast.forecastday[n].fcttext);
 			}
   		}
