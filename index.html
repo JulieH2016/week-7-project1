@@ -78,17 +78,39 @@
         						<h4 class="modal-title" id="myModalLabel">ADDRESS GOES HERE</h4>
       						</div>
       						<div class="modal-body" id="myModalContent">
-      							<div class=row>
+      							<!-- first row holds the POI larger image and a small map w/marker -->
+      							<div class="row" id="modalRow1">
       								<div class="col-md-8" id="myModalPOIImage"></div>
-      								<div class="col-md-4">
-      									<div class="row">
-      										<div class="col-md-12" id="myModalMapImage"></div>
-      									</div>
-      									<div class="row">
-      										<div class="col-md-12" id="myModalWeatherInfo"></div>
-      									</div>
-      								</div>
+      								<div class="col-md-4" id="myModalMapImage"></div>
       							</div>
+      							<!-- Next 6 rows hold the weather data: icon and forecast -->
+								<table class="table table-condensed table-striped table-responsive">
+									<!-- table version -->
+									<tr id="weatherRow0">
+										<td id="iconPeriod0"></td>
+										<td id="textPeriod0"></td>
+									</tr>
+									<tr id="weatherRow1">
+										<td id="iconPeriod1"></td>
+										<td id="textPeriod1"></td>
+									</tr>
+									<tr id="weatherRow2">
+										<td id="iconPeriod2"></td>
+										<td id="textPeriod2"></td>
+									</tr>
+									<tr id="weatherRow3">
+										<td id="iconPeriod3"></td>
+										<td id="textPeriod3"></td>
+									</tr>
+									<tr id="weatherRow4">
+										<td id="iconPeriod4"></td>
+										<td id="textPeriod4"></td>
+									</tr>
+									<tr id="weatherRow5">
+										<td id="iconPeriod5"></td>
+										<td id="textPeriod5"></td>
+									</tr>
+								</table>
       						</div>
     					</div>
   					</div>
