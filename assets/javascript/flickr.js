@@ -4,10 +4,15 @@
 var globalName;
 var globalVicinity;
 
-// set up two global location related variables for use in multiple functions
+// set up two global location related variables for use in weather functions
 // they hold the latitude and longitude returned by the Google Maps geocoding API
+// for the overal city or location
 var globalLatitude = 0;
 var globalLongitude = 0;
+
+// set up two global locations related to the specific POI clicked by user
+var globalPOILatitude = 0;
+var globalPOILongitude = 0;
 
 // function to save valid user locations
 function saveLocation(receivedLocation) {
@@ -118,16 +123,21 @@ function grabThumbnails (locationClick){
 			// Now add in the miniMap built with the Google Static Maps API
 			// first the Google APIs key
 			var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+
 		    // location needs to be url escaped for calls
 		    var urlEscapedLocation = encodeURIComponent(globalVicinity);
 		    console.log("urlEscapedLocation is: " + urlEscapedLocation);
+
 		    // name needs to be url escaped for calls
 		    var urlEscapedName = encodeURIComponent(globalName);
 		    console.log("urlEscapedName is: " + urlEscapedName);
-		    // build the marker location as "name,address"
-		    var marker = urlEscapedName + "," + urlEscapedLocation;
+
+		    // build the marker location as "latitude,longitude" of POI
+		    var marker = globalPOILatitude + "," + globalPOILongitude;
+		    
 		    // Now build the URL for the API call
 		    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=roadmap&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
+		    
 		    // and let's place the map in the modal
 		    $("#myModalMapImage").html("<img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
 
@@ -195,16 +205,21 @@ function displaySixThumbnails(imagesAvailable, response) {
 		// Now add in the miniMap built with the Google Static Maps API
 		// first the Google APIs key
 		var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+	    
 	    // location needs to be url escaped for calls
 	    var urlEscapedLocation = encodeURIComponent(globalVicinity);
 	    console.log("urlEscapedLocation is: " + urlEscapedLocation);
+	    
 	    // name needs to be url escaped for calls
 	    var urlEscapedName = encodeURIComponent(globalName);
 	    console.log("urlEscapedName is: " + urlEscapedName);
-	    // build the marker location as "name,address"
-	    var marker = urlEscapedName + "," + urlEscapedLocation;
+	    
+	    // build the marker location as "latitude,longitude" of POI
+	    var marker = globalPOILatitude + "," + globalPOILongitude;
+
 	    // Now build the URL for the API call
 	    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=roadmap&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
+	    
 	    // and let's place the map in the modal
 	    $("#myModalMapImage").html("<img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
 
