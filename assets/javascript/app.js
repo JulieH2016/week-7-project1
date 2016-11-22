@@ -73,20 +73,23 @@ function initMap() {
                         saveLocation(location);
 
                         // Set the latitude and logitude by retreiving from the response object
-                        var latitude = response.results[0].geometry.location.lat;
-                        var longitude = response.results[0].geometry.location.lng;
+                        globalLatitude = response.results[0].geometry.location.lat;
+                        globalLongitude = response.results[0].geometry.location.lng;
 
                         // Let's log out the latitude and longitude for testing
-                        console.log("From initMap function, latitude: " + latitude + " longitude: " + longitude);
+                        console.log("From initMap function, latitude: " + globalLatitude + " longitude: " + globalLongitude);
 
                         // clear out the prior thumbnails
                         clearThumbnailsArea();
+
+                        // get the Weather and populate the modal for later display
+                        getWeather();
 
                         // Now that we have the latitude and longitude and venue type
                         // Let's call the buildMap function so we can display a map
                         // Along with points of interestes of the venue type
                         // Do this by passing these three values to the buildMap function
-                        buildMap(latitude, longitude, venue);
+                        buildMap(venue);
 
                     } else {
 
@@ -125,7 +128,7 @@ function initMap() {
 
 // buildMap function builds and the map using the latitude,
 // longitude, and venue type passed to it from the initMap function
-function buildMap(latitude, longitude, venue) {
+function buildMap(venue) {
 
     // first remove the logo
     $("#logoImageDiv").empty();
@@ -136,7 +139,7 @@ function buildMap(latitude, longitude, venue) {
     // containing latitude and longitude. Create this
     // object and pass in the latitude and longitude this
     // function received
-    var locationCenter = {lat: latitude, lng: longitude};
+    var locationCenter = {lat: globalLatitude, lng: globalLongitude};
 
     // Create a new map in the #map div defined in index.html
     map = new google.maps.Map(document.getElementById('map'), {
