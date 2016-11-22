@@ -82,6 +82,9 @@ function initMap() {
                         // clear out the prior thumbnails
                         clearThumbnailsArea();
 
+                        // get the Weather and populate the modal for later display
+                        getWeather();
+
                         // Now that we have the latitude and longitude and venue type
                         // Let's call the buildMap function so we can display a map
                         // Along with points of interestes of the venue type
@@ -136,7 +139,7 @@ function buildMap(latitude, longitude, venue) {
     // containing latitude and longitude. Create this
     // object and pass in the latitude and longitude this
     // function received
-    var locationCenter = {lat: latitude, lng: longitude};
+    var locationCenter = {lat: globalLatitude, lng: globalLongitude};
 
     // Create a new map in the #map div defined in index.html
     map = new google.maps.Map(document.getElementById('map'), {
