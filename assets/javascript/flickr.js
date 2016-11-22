@@ -213,7 +213,7 @@ function getWeather() {
 	var APIKey = "cd425eda92edbd2d";
 
 	// Here we are building the URL we need to query the API for the forecast
-	var queryURL = "http://api.wunderground.com/api/cd425eda92edbd2d/forecast/q/" + globalLatitude + "," + globalLongitude + ".json";
+	var queryURL = "https://api.wunderground.com/api/cd425eda92edbd2d/forecast/q/" + globalLatitude + "," + globalLongitude + ".json";
 
 
 	$.ajax({
