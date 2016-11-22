@@ -158,7 +158,7 @@ function displaySixThumbnails(imagesAvailable, response) {
 		$('#myModalLabel').text(globalName + ", " + globalVicinity);
 
 		// populate the content area with the larger version of the image
-		$("#myModalPOIImage").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" alt="localtion image">');
+		$("#myModalPOIImage").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" id="largerPOIimage" alt="localtion image">');
 
 		// Now add in the miniMap built with the Google Static Maps API
 		// first the Google APIs key
