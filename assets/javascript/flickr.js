@@ -108,44 +108,49 @@ function grabThumbnails (locationClick){
 			clearThumbnailsArea();
 			var imgDisplay = $('<img>');
 			imgDisplay.attr('src', "assets/images/NoImageThumbnail.jpg");
+			imgDisplay.addClass("myShowImage");
 			$('#image1').html(imgDisplay);
 
+			// clear prior listeners
+			$(".myShowImage").off("click");
+
 			// create a listener for the "no photos" thumbnail we just drew
-			$("#image1").on("click", function() {
+			$(".myShowImage").on("click", function() {
 
-			// display the modal
-			// first enter the name and address in the title
-			$('#myModalLabel').text(globalName + ", " + globalVicinity);
+				// display the modal
+				// first enter the name and address in the title
+				$('#myModalLabel').text(globalName + ", " + globalVicinity);
 
-			// populate the content area with the larger version of the image
-			$("#myModalPOIImage").html('<img src="assets/images/NoImageThumbnail.jpg" class="img-responsive" id="largerPOIimage" alt="localtion image">');
+				// populate the content area with the larger version of the image
+				$("#myModalPOIImage").html('<img src="assets/images/NoImageThumbnail.jpg" class="img-responsive" id="largerPOIimage" alt="location image">');
 
-			// Now add in the miniMap built with the Google Static Maps API
-			// first the Google APIs key
-			var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+				// Now add in the miniMap built with the Google Static Maps API
+				// first the Google APIs key
+				var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
 
-		    // location needs to be url escaped for calls
-		    var urlEscapedLocation = encodeURIComponent(globalVicinity);
-		    console.log("urlEscapedLocation is: " + urlEscapedLocation);
+			    // location needs to be url escaped for calls
+			    var urlEscapedLocation = encodeURIComponent(globalVicinity);
+			    console.log("urlEscapedLocation is: " + urlEscapedLocation);
 
-		    // name needs to be url escaped for calls
-		    var urlEscapedName = encodeURIComponent(globalName);
-		    console.log("urlEscapedName is: " + urlEscapedName);
+			    // name needs to be url escaped for calls
+			    var urlEscapedName = encodeURIComponent(globalName);
+			    console.log("urlEscapedName is: " + urlEscapedName);
 
-		    // build the marker location as "latitude,longitude" of POI
-		    var marker = globalPOILatitude + "," + globalPOILongitude;
-		    
-		    // Now build the URL for the API call
-		    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=roadmap&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
-		    
-		    // and let's place the map in the modal
-		    $("#myModalMapImage").html("<img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
+			    // build the marker location as "latitude,longitude" of POI
+			    var marker = globalPOILatitude + "," + globalPOILongitude;
+			    
+			    // Now build the URL for the API call
+			    var miniMapURL1 = "https://maps.googleapis.com/maps/api/staticmap?scale=2&maptype=roadmap&size=400x400&markers=" + marker + "&key="+YOUR_API_KEY;
+			    
+			    // and let's place the map in the modal
+			    $("#myModalMapImage").html("<img id='miniMapImage' src=" + miniMapURL1 + " class='img-responsive' alt='mini map'>");
 
-			// finally make the modal visible
-			$('#myModal').modal('show');
+				// finally make the modal visible
+				$('#myModal').modal('show');
 
-		// end of the listener on the thumbnails
-	});
+			// end of the listener on the thumbnails
+			});
+			
 		}
 
 	// end of the ajax call
@@ -188,6 +193,9 @@ function displaySixThumbnails(imagesAvailable, response) {
 	// end of the for loop
 	};
 
+	// clear prior listeners
+	$(".myShowImage").off("click");
+
 	// create a listener for the 6 images we just drew
 	$(".myShowImage").on("click", function() {
 
@@ -200,7 +208,7 @@ function displaySixThumbnails(imagesAvailable, response) {
 		$('#myModalLabel').text(globalName + ", " + globalVicinity);
 
 		// populate the content area with the larger version of the image
-		$("#myModalPOIImage").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" id="largerPOIimage" alt="localtion image">');
+		$("#myModalPOIImage").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" id="largerPOIimage" alt="location image">');
 
 		// Now add in the miniMap built with the Google Static Maps API
 		// first the Google APIs key
@@ -259,7 +267,6 @@ function getWeather() {
 	// Here we are building the URL we need to query the API for the forecast
 	var queryURL = "https://api.wunderground.com/api/cd425eda92edbd2d/forecast/q/" + globalLatitude + "," + globalLongitude + ".json";
 
-
 	$.ajax({
   		url : queryURL,
 		dataType : "jsonp",
@@ -273,8 +280,10 @@ function getWeather() {
 				// then convert the http portion to https
 				var finalIconURL = tempIconURL.replace(/^http:\/\//i, 'https://');
 
-				// $("#fc" + n).html(parsed_json.forecast.txt_forecast.forecastday[n].title + " " + parsed_json.forecast.txt_forecast.forecastday[n].fcttext + " " + "<img src='" + parsed_json.forecast.txt_forecast.forecastday[n].icon_url + "' alt='icon'>");
+				// Extract the forecast overview icon for the period and place that
 				$("#iconPeriod" + n).html("<img src='" + finalIconURL + "' alt='icon'>");
+
+				// Extract the text forecast for the priod and place that
 				$("#textPeriod" + n).html("<strong>" + parsed_json.forecast.txt_forecast.forecastday[n].title + "</strong><br>" + parsed_json.forecast.txt_forecast.forecastday[n].fcttext);
 			}
   		}
