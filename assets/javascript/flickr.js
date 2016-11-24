@@ -49,6 +49,12 @@ saveLocation("Orlando, FL");
 // Function to generate thumbnails of images at a location
 // makes ajax call to Flickr API
 function grabThumbnails (locationClick){
+
+	// first clear out the thumbnails area
+	clearThumbnailsArea();
+
+	// then load a temporary loading animated gif in position 1
+	loadingImage();
 		
 	// define userInput as the location being passed into the function
 	var userInput = locationClick;
@@ -82,6 +88,9 @@ function grabThumbnails (locationClick){
 
 			// begin by clearing the thumbnails area
 			clearThumbnailsArea();
+
+			// load loading image gif until thumbnails load in all 6 thumbnail divs
+			loading6Image();
 
 			// display a reload images button first by generating its HTML
 			var reloadButtonHTML = '<button type="submit" class="btn btn-danger" id="reloadButton">SHOW ME MORE!</button>'
@@ -252,6 +261,20 @@ function clearThumbnailsArea() {
 	$("#image6").empty();
 	$("#reloadButtonDiv").empty();
 }
+
+// function to load a temporary loading gif in image1 div until thumbnail loads
+function loadingImage() {
+	// place a loading animated gif in thumbnail 1 div
+	$("#image1").html('<img src="assets/images/loading150x150.gif" alt="loading">');
+}
+
+// function to load a temporary loading gif in image1-image6 thumbnail divs
+function loading6Image() {
+	for (var x=1; x<7; x++) {
+		$("#image"+x).html('<img src="assets/images/loading150x150.gif" alt="loading">');
+	}
+}
+
 
 // getWeather function makes call to Weather Underground API
 // and fills in information on the modal that appears when a photo
