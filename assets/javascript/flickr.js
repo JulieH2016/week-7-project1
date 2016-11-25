@@ -63,7 +63,7 @@ function grabThumbnails (locationClick){
 	var apiKey = '8f7799f4500510037138500c6216fecd';
 
 	// generate the Flickr ajax call url
-	var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + apiKey + '&tags=' + userInput + '&privacy_filter=1&safe_search=1&content_type=1&extras=url_q%2C+url_z&per_page=100&format=json&nojsoncallback=1';
+	var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + apiKey + '&tags=' + userInput + '&privacy_filter=1&safe_search=1&content_type=1&lat=' + globalPOILatitude +'&lon='+ globalPOILongitude +'&accuracy=16&extras=url_q%2C+url_z&per_page=100&format=json&nojsoncallback=1';
 
 	// now that we have the url generated, let's make the ajax call
 	$.ajax({url: apiUrl, method: 'GET'}).done(function(response){
@@ -71,6 +71,7 @@ function grabThumbnails (locationClick){
 		// let's log the response for testing purposes
 		console.log("flickr API call returns:");
 		console.log(response);
+
 
 		// the call returns an object of 100 images. We want to randomly
 		// pick 6 of them. To do this, we need a start location. For that
