@@ -72,7 +72,6 @@ function grabThumbnails (locationClick){
 		console.log("flickr API call returns:");
 		console.log(response);
 
-
 		// the call returns an object of 100 images. We want to randomly
 		// pick 6 of them. To do this, we need a start location. For that
 		// lets begin by picking a random number between 0 and the number
@@ -128,8 +127,12 @@ function grabThumbnails (locationClick){
 			$(".myShowImage").on("click", function() {
 
 				// display the modal
-				// first enter the name and address in the title
+				// first enter the name and address in the title after clearing the div
+				$('#myModalLabel').empty();
 				$('#myModalLabel').text(globalName + ", " + globalVicinity);
+
+				// then link the title to the foursquare page if one exists
+				foursquareCheck();
 
 				// populate the content area with the larger version of the image
 				$("#myModalPOIImage").html('<img src="assets/images/NoImageThumbnail.jpg" class="img-responsive" id="largerPOIimage" alt="location image">');
@@ -214,8 +217,12 @@ function displaySixThumbnails(imagesAvailable, response) {
 		console.log($(this).attr("data-fullsize"));
 
 		// display the modal
-		// first enter the name and address in the title
+		// first enter the name and address in the title after clearing the div
+		$('#myModalLabel').empty();
 		$('#myModalLabel').text(globalName + ", " + globalVicinity);
+
+		// then link the title to the foursquare page if one exists
+		foursquareCheck();
 
 		// populate the content area with the larger version of the image
 		$("#myModalPOIImage").html('<img src="' + $(this).attr("data-fullsize") + '" class="img-responsive" id="largerPOIimage" alt="location image">');
@@ -276,7 +283,6 @@ function loading6Image() {
 	}
 }
 
-
 // getWeather function makes call to Weather Underground API
 // and fills in information on the modal that appears when a photo
 // is clicked. Doing it this way minimizes calls to the API, which
@@ -313,4 +319,39 @@ function getWeather() {
   		}
   	});
 
+}
+
+// This function checks to see if a page exists on Foursquare.com for the POI
+// and if it does, then it replaces the modal title to with a title that is
+// linked to that page instead
+function foursquareCheck() {
+	// make foursquare ajax call by first setting up the keys
+	var client_id = "FQU4MYIQZQST5PMMTIKXABRBGJHIWH5NLQXA2AWJ2S4KNWNB";
+	var client_secret = "NPJ45DX1AL1XUZAKHAFDAQZILKSS1VHJP54DLCUL3QHI0T3B";
+
+	// next set up the keywords (POI name) and latitude / longitude
+	var keywords = encodeURIComponent(globalName);
+	var lat = globalPOILatitude;
+	var lon = globalPOILongitude;
+
+	// build the ajax query URL
+	var queryURL = "https://api.foursquare.com/v2/venues/search?radius=100&v=20161125&limit=1&client_id=" + client_id + "&client_secret=" + client_secret + "&ll=" + lat + "," + lon + "&query=" + keywords;
+
+	// make the ajax query
+	$.ajax({url: queryURL, method: "GET"}).done(function(foursqResponse) {
+
+		console.log(foursqResponse);
+
+		// if a foursquare page exists for the POI then link it within modal address title
+		if (typeof foursqResponse.response.venues[0].id !== "undefined") {
+
+			// built the URL by extracting page ID from the response object
+			var foursquareURL = "https://foursquare.com/v/" + foursqResponse.response.venues[0].id;
+
+			// clear out previous address and updated it with the linked address instead
+			$('#myModalLabel').empty();
+			$('#myModalLabel').html('<a target="_blank" href="' + foursquareURL + '">' + globalName + ", " + globalVicinity + '</a>');
+		}
+
+	});
 }

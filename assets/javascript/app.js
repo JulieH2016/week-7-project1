@@ -301,8 +301,15 @@ function getImages(somePlace) {
 
     // Next the address of the place
     console.log("address: " + somePlace.vicinity);
+    
     // and store it in the global variable globalVicinity
-    globalVicinity = somePlace.vicinity;
+    // sometimes Google Places API doesn't have the address
+    // and it comes back undefined. Trap for that.
+    if (typeof somePlace.vicinity !== "undefined") {
+        globalVicinity = somePlace.vicinity;
+    } else {
+        globalVicinity = "address unavailable";
+    }
 
     // Now get the actual images
     // using the grabThumbnails function in flickr.js
