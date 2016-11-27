@@ -22,13 +22,13 @@ https://github.com/realzaidiguy/week-7-project1
 
 -----------------------------------------
 
-#### Concept
+## Concept
 An app to get ideas for things to do around a city, or any specific location. User can “shop” images of POIs around a location, and if something strikes their interest they can then get further information on location, and a weather forecast, to aid in decision whether to visit.
 
-#### Detail Walkthrough
+## Detail Walkthrough
 Initial page displays a clean interface asking the user to enter a destination, and select a venue type of: Amusement Park, Art Gallery, Museum, Park or Zoo. Upon entry, the app calls the **Google Maps JavaScript API** (which can take a fairly loosely constructed string location) to generate a map object (centered around the location the user entered) that is then displayed. Next, a call is made to the **Google Maps Geocoding API** to get the latitude and longitude of the location the user had entered, for later use. A call is then made to the **Google Places API Web Service** (which requires latitude and longitude as input) to get points of interest of the venue type the user had selected, centered around the latitude and longitude that was determined earlier. These POIs are then populated onto the map as clickable markers. The user can then click on any marker and a small info window will show the name of the POI, and at the same time a call is made to the **Flickr API** to retrieve relevant images and display them as thumbnails below the map. A button is generated that allows the user to request additional thumbnails. Clicking on the thumbnail brings up a modal window that displays a larger version of the thumbnail. Also a call is made to the **Google Static Maps API** to generate a small map image showing the POI, which is also displayed. Finally a call is made to the **Weather Underground API** (using the earlier determined latitude and longitude) to get the forecast for 3 days, and that too is displayed within the modal. Finally, the **FourSquare API** is checked to see if information exists in their database for the POI, and if it does then the name of the POI at the top of the modal is turned into a link to the FourSquare page for that POI.
 
-#### Project Requirements and Goals Met
+## Project Requirements and Goals Met
 **At least 2 APIs:** 7 APIs used
 
 **Use AJAX to pull data:** Completed
@@ -51,7 +51,7 @@ Initial page displays a clean interface asking the user to enter a destination, 
 
 **Extras:** Local Data Storage used for recalling last few user location searches, mobile responsive with Bootstrap use
 
-#### Additional Unused Research
+## Additional Unused Research
 **Facebook API, Pinterest API, Twitter API:** Team decided against using any of these as they didn’t really align with the concept of the app.
 
 **Leaflet:** JavaScript Library for mobile maps. Decided not to use because it didn’t have sufficient functionality that we could get via the various Google APIs instead
@@ -64,7 +64,7 @@ Initial page displays a clean interface asking the user to enter a destination, 
 
 **Yelp API:** Abandoned due to lack of sufficient JS documentation, and OAUTH complications.
 
-####Issues
+##Issues
 **1.Google APIs** do not function as you would expect. The Google Maps JavaScript API takes in location as a descriptive string and provides a map object centered around that location. However, the Google Places API Web Service and Google Static Maps API both require location to be passed as latitude/longitude. For this reason you have to make a separate call to the Google Maps Geocoding API to get the latitude/longitude of the location that the Google Maps JavaScript API already returned. It’s not intuitive, and took some research to figure out.
 
 **2. Weather Underground API** permits up to 10 calls per minute, which averages to one call every six seconds. In order to minimize the number of calls, we pull the weather data just one time when a user selects a new location, and populate the modal with the forecast even though it’s hidden in the beginning. When the user clicks on a thumbnail to bring up the modal, the forecast is already there and doesn’t need to be pulled again. The only time we get a new pull is when the location is changed, which hopefully is less than once every six seconds.
@@ -79,5 +79,5 @@ Initial page displays a clean interface asking the user to enter a destination, 
 
 **7. Regarding GitHub**, team members had already written most of their code for different functions by the time we received training on how to properly use GitHub for collaboration, and at that point they just committed their final code. After we received the GitHub collaboration training, the main thing we had left to do was to consolidate all the functions, which was done by one team member. For this reason the GitHub commit history does not accurately portray the amount of work done by different team members.
 
-####Future Development
+##Future Development
 Try to find source for, and integrate additional photos (Google Photos?). Provide mechanism for user to save the POIs that interest them, and retrieve them later.
