@@ -292,7 +292,7 @@ function loading6Image() {
 function getWeather() {
 
 	// Define the Weather Underground API Key
-	var APIKey = "cd425eda92edbd2d";
+	var APIKey = "1b23e073edfe264e";
 
 	// Here we are building the URL we need to query the API for the forecast
 	var queryURL = "https://api.wunderground.com/api/cd425eda92edbd2d/forecast/q/" + globalLatitude + "," + globalLongitude + ".json";
