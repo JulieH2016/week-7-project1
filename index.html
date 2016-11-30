@@ -35,16 +35,18 @@
 
 		<!-- title - will be populated later via JS when logo disappears after location is selected -->
 		<div class="row">
-			<div class="col-md-12" id="titleDiv">
+			<div class="col-md-12 page-header" id="titleDiv">
 				<!-- The following line of HTML code is what will be inserted via JS -->
 				<!-- <div class="alert alert-danger text-center" role="alert"><h1>Oh, The Places We Will Go!</h1></div> -->
 			</div>
 		</div>
 
 		<!-- begin by having logo displayed -->
-		<div class="row">
-			<div class="col-md-12" id="logoImageDiv">
-				<img src="assets/images/PlacesLogo.png" class="img-responsive" id="logoImage" alt="Places Logo">
+		<div class="row" id="logoImageDiv">
+			<div class="col-md-12">
+				<div class="well well-lg">
+					<img src="assets/images/PlacesLogo.png" class="img-responsive" id="logoImage" alt="Places Logo">
+				</div>
 			</div>
 		</div>
 
@@ -111,7 +113,9 @@
 										<td id="textPeriod5"></td>
 									</tr>
 								</table>
-								<img src="assets/images/wundergroundLogo_4c_horz.jpg" id="wuLogo" alt="WU Logo">
+								<a target="_blank" href="https://www.wunderground.com/?apiref=6d09c4ae63c2a274">
+									<img src="assets/images/wundergroundLogo_4c_horz.jpg" id="wuLogo" alt="WU Logo">
+								</a>
       						</div>
     					</div>
   					</div>
@@ -121,63 +125,63 @@
 		<!-- End of the point of interest modal code -->
 
 		<!-- location / venue / buttons row -->
-			<div class="row">
+		<div class="row" id="userEntryRow">
 
-				<!-- location and venue div -->
-				<div class="col-md-12 text-center">
+			<!-- location and venue div -->
+			<div class="col-md-12 text-center">
 
-					<!-- begin our form-->
-					<form class="form-inline">
+				<!-- begin our form-->
+				<form class="form-inline">
 
-						<!-- first input is for the location -->
-			  			<div class="form-group">
-			    			<label for="location">Location: </label>
-			    			<input type="text" class="form-control" list="savedLocations" id="location" placeholder="destination">
-			    			<datalist id="savedLocations"></datalist>
-			  			</div>
+					<!-- first input is for the location -->
+		  			<div class="form-group">
+		    			<label for="location">Location: </label>
+		    			<input type="text" class="form-control" list="savedLocations" id="location" placeholder="Destination">
+		    			<datalist id="savedLocations"></datalist>
+		  			</div>
 
-						<!-- second input is for the venue type -->
-			  			<div class="form-group">
-		    				<label for="venue"> Venue: </label>
-			   				<select class="form-control" id="venue">
-			   					<option>Amusement Park</option>
-			   					<option>Art Gallery</option>
-			   					<option>Museum</option>
-			   					<option>Park</option>
-			   					<option>Zoo</option>
-							</select>
-		  				</div>
+					<!-- second input is for the venue type -->
+		  			<div class="form-group">
+	    				<label for="venue"> Venue: </label>
+		   				<select class="form-control" id="venue">
+		   					<option>Amusement Park</option>
+		   					<option>Art Gallery</option>
+		   					<option>Museum</option>
+		   					<option>Park</option>
+		   					<option>Zoo</option>
+						</select>
+	  				</div>
 
-						<!-- go button div -->
-						<button type="submit" class="btn btn-danger" id="goButton">GO!</button>
+					<!-- go button div -->
+					<button type="submit" class="btn btn-danger" id="goButton">GO!</button>
 
-						<!-- reset button div -->
-						<button type="reset" class="btn btn-danger" id="resetButton">RESET!</button>
+					<!-- reset button div -->
+					<button type="reset" class="btn btn-danger" id="resetButton">RESET!</button>
 
-					</form>
+				</form>
 
-					<!-- end of location and venue div -->
-				</div>
+			<!-- end of location and venue div and column -->
+			</div>
+
+		<!-- end of location and venue row -->
+		</div>
 
 
 		<!-- map row -->
-		<div class="row">
-	    	<div class="col-md-1"></div>
-
+		<div class="row" id="mapRow">
+		<div class="panel panel-default">
+		<div class="panel-body">
 	    	<!-- populate map in this column -->
-		    <div class="col-md-10" id="map"></div>
-	    	
-	    	<div class="col-md-1"></div>
-		</div>
+		    <div class="col-md-12" id="map"></div>
+		</div></div></div>
 
 		<!-- photos row -->
-		<div class="row">
+		<div class="row" id="photosDiv">
+		<div class="panel panel-default">
+		<div class="panel-body">
 
-			<!-- padding column 1 -->
-			<div class="col-md-1"></div>
-
-			<!-- column 2 -->
-			<div class="col-md-2">
+			<!-- column 1 -->
+			<div class="col-md-3">
 
 				<!-- image 1 row -->
 				<div class="row">
@@ -189,11 +193,11 @@
 					<div class="col-md-12" id="image4"></div>
 				</div>
 
-			<!-- end column 2 -->
+			<!-- end column 1 -->
 			</div>
 
-			<!-- column 3 -->
-			<div class="col-md-2">
+			<!-- column 2 -->
+			<div class="col-md-3">
 
 				<!-- image 2 row -->
 				<div class="row">
@@ -205,11 +209,11 @@
 					<div class="col-md-12" id="image5"></div>
 				</div>
 
-			<!-- end column 3 -->
+			<!-- end column 2 -->
 			</div>
 
-			<!-- column 4 -->
-			<div class="col-md-2">
+			<!-- column 3 -->
+			<div class="col-md-3">
 
 				<!-- image 3 row -->
 				<div class="row">
@@ -221,25 +225,18 @@
 					<div class="col-md-12" id="image6"></div>
 				</div>
 
+			<!-- end column 3 -->
+			</div>
+
+			<!-- column 4 -->
+			<!-- reload button - empty for now - populate with function that loads images -->
+			<div class="col-md-3" id="reloadButtonDiv">
+
 			<!-- end column 4 -->
 			</div>
 
-			<!-- column 5 -->
-			<div class="col-md-4" id="reloadButtonDiv">
-
-					<!-- reload button - empty for now - populate with function that loads images -->
-					<!-- use the button html below in the JS file to create the reload button and target -->
-					<!-- the reloadButtonDiv id -->
-					<!-- <button type="submit" class="btn btn-danger" id="reloadButton"></button> -->
-
-			<!-- end column 5 -->
-			</div>
-
-			<!-- padding column 6 -->
-			<div class="col-md-1"></div>
-
-
 			<!-- end photos row -->
+			</div></div>
 			</div>
 
 	<!-- end the bootstrap container -->

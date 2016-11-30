@@ -1,14 +1,12 @@
+body {
+	background: url("../images/arches_2X.png");
+}
+
 #map {
     height: 300px;
-    width: 800px;
-}
-
-.form-inline {
-	margin-bottom: 20px;
-}
-
-#map {
-	margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .myShowImage {
@@ -25,4 +23,29 @@
 
 #wuLogo {
 	width: 150px;
+}
+
+#logoImage {
+	width: 100%;
+}
+
+#logoImageDiv {
+	margin-top: 10px;
+}
+
+#image1, #image2, #image3, #image4, #image5, #image6 {
+	margin-top: 10px;
+}
+
+#userEntryRow {
+	margin-bottom: 30px;
+}
+
+#mapRow {
+	margin-top: 40px;
+	margin-bottom: 30px;
+}
+
+#reloadButton {
+	margin-top: 20px;
 }

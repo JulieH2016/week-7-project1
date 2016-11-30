@@ -89,6 +89,9 @@ function grabThumbnails (locationClick){
 			// begin by clearing the thumbnails area
 			clearThumbnailsArea();
 
+			// and bring up the #photosDiv so we can show thumbnails
+			$("#photosDiv").show();
+
 			// load loading image gif until thumbnails load in all 6 thumbnail divs
 			loading6Image();
 
@@ -119,6 +122,9 @@ function grabThumbnails (locationClick){
 			imgDisplay.attr('src', "assets/images/NoImageThumbnail.jpg");
 			imgDisplay.addClass("myShowImage");
 			$('#image1').html(imgDisplay);
+
+			// make the #photosDiv visible so we can show the no photos image
+			$("#photosDiv").show();
 
 			// clear prior listeners
 			$(".myShowImage").off("click");
