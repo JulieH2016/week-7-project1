@@ -30,7 +30,8 @@ body {
 }
 
 #logoImageDiv {
-	margin-top: 10px;
+	margin-top: 50px;
+	margin-bottom: 10px;
 }
 
 #image1, #image2, #image3, #image4, #image5, #image6 {
