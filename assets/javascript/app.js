@@ -1,10 +1,12 @@
 // initMap function is called first by the Google Maps object generated in index.html
 function initMap() {
 
-    // Hide the mapRow div and the photosDiv to start
+    // Hide the #mapRow div and the #photosDiv  and titleDiv to start
     // they aren't needed until we have a map or photos to display
+    // and want to bring up the title
     $("#mapRow").hide();
     $("#photosDiv").hide();
+    $("#titleDiv").hide();
 
     // add a listener for the reset button that reloads the site
     $("#resetButton").on("click", function() {
@@ -145,6 +147,7 @@ function buildMap(venue) {
     // first remove the logo
     $("#logoImageDiv").hide();
     // and replace it with a smaller title
+    $("#titleDiv").show();
     $("#titleDiv").html('<div class="panel panel-danger"><div class="panel-heading"><h1 class="text-center">Oh, The Places We Will Go!</div></div></div>');
 
     // Google Maps Map API requires that it be fed an object
