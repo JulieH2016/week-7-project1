@@ -1,6 +1,11 @@
+@font-face {
+    font-family: CaveatBrush;
+    src: url(../fonts/CaveatBrush-Regular.ttf);
+}
+
 body {
 	background: url("../images/arches_2X.png");
-	font-family: 'Caveat Brush', cursive !important;
+	font-family: CaveatBrush !important;
 	font-size: 48px;
 }
 
@@ -12,8 +17,13 @@ input, select, button {
 	font-size: 20px !important;
 }
 
+#titleDiv, label {
+	text-shadow: 4px 4px 4px #aaa;
+}
+
 #myModalLabel {
 	font-size: 30px !important;
+	text-shadow: 4px 4px 4px #aaa;
 }
 
 #map {
