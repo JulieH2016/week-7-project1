@@ -1,6 +1,11 @@
 // initMap function is called first by the Google Maps object generated in index.html
 function initMap() {
 
+    // Hide the mapRow div and the photosDiv to start
+    // they aren't needed until we have a map or photos to display
+    $("#mapRow").hide();
+    $("#photosDiv").hide();
+
     // add a listener for the reset button that reloads the site
     $("#resetButton").on("click", function() {
         location.href=location.href;
@@ -8,6 +13,10 @@ function initMap() {
 
     // we want to begin when user has entered a location and clicks the Go button
     $("#goButton").on("click", function() {
+
+        // Whenever the Go button is hit, we want to hide the photos div
+        // because the assumption is new images will be loaded for new location
+        $("#photosDiv").hide();
 
         // For testing - log what the user entered for location
         console.log("in initMap function user entered #location as: " + $("#location").val());
@@ -72,6 +81,9 @@ function initMap() {
                         // save the location to local storage
                         saveLocation(location);
 
+                        // Also now bring up the #mapRow div so we can display the map
+                        $("#mapRow").show();
+
                         // Set the latitude and logitude by retreiving from the response object
                         globalLatitude = response.results[0].geometry.location.lat;
                         globalLongitude = response.results[0].geometry.location.lng;
@@ -131,9 +143,9 @@ function initMap() {
 function buildMap(venue) {
 
     // first remove the logo
-    $("#logoImageDiv").empty();
+    $("#logoImageDiv").hide();
     // and replace it with a smaller title
-    $("#titleDiv").html('<div class="alert alert-danger text-center" role="alert"><h1>Oh, The Places We Will Go!</h1></div>');
+    $("#titleDiv").html('<div class="panel panel-danger"><div class="panel-heading"><h1 class="text-center">Oh, The Places We Will Go!</div></div></div>');
 
     // Google Maps Map API requires that it be fed an object
     // containing latitude and longitude. Create this
