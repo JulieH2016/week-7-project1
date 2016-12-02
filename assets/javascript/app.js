@@ -58,7 +58,7 @@ function initMap() {
         }
 
         // We need our Google Developer Key to make the ajax call
-        var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+        var YOUR_API_KEY = "AIzaSyD4gTlyrAaD5wN9zit_lSKLiNIGWhgKtwc";
 
         // Now we have everything to build our requestURL
         var requestURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + location + "&key=" + YOUR_API_KEY;

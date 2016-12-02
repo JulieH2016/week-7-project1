@@ -60,7 +60,7 @@ function grabThumbnails (locationClick){
 	var userInput = locationClick;
 
 	// set up the Flickr API key
-	var apiKey = '8f7799f4500510037138500c6216fecd';
+	var apiKey = 'e2ec4b363741a8dfb51716ed6e0322c5';
 
 	// generate the Flickr ajax call url
 	var apiUrl = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=' + apiKey + '&tags=' + userInput + '&privacy_filter=1&safe_search=1&content_type=1&lat=' + globalPOILatitude +'&lon='+ globalPOILongitude +'&accuracy=16&extras=url_q%2C+url_z&per_page=100&format=json&nojsoncallback=1';
@@ -145,7 +145,7 @@ function grabThumbnails (locationClick){
 
 				// Now add in the miniMap built with the Google Static Maps API
 				// first the Google APIs key
-				var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+				var YOUR_API_KEY = "AIzaSyD4gTlyrAaD5wN9zit_lSKLiNIGWhgKtwc";
 
 			    // location needs to be url escaped for calls
 			    var urlEscapedLocation = encodeURIComponent(globalVicinity);
@@ -235,7 +235,7 @@ function displaySixThumbnails(imagesAvailable, response) {
 
 		// Now add in the miniMap built with the Google Static Maps API
 		// first the Google APIs key
-		var YOUR_API_KEY = "AIzaSyDYF2GrpKe_zY-zNC4GrdGWhQ8cWahoKUU";
+		var YOUR_API_KEY = "AIzaSyD4gTlyrAaD5wN9zit_lSKLiNIGWhgKtwc";
 	    
 	    // location needs to be url escaped for calls
 	    var urlEscapedLocation = encodeURIComponent(globalVicinity);
@@ -298,10 +298,10 @@ function loading6Image() {
 function getWeather() {
 
 	// Define the Weather Underground API Key
-	var APIKey = "1b23e073edfe264e";
+	var APIKey = "cac9c2020e49c7f8";
 
 	// Here we are building the URL we need to query the API for the forecast
-	var queryURL = "https://api.wunderground.com/api/cd425eda92edbd2d/forecast/q/" + globalLatitude + "," + globalLongitude + ".json";
+	var queryURL = "https://api.wunderground.com/api/" + APIKey + "/forecast/q/" + globalLatitude + "," + globalLongitude + ".json";
 
 	$.ajax({
   		url : queryURL,
@@ -332,8 +332,8 @@ function getWeather() {
 // linked to that page instead
 function foursquareCheck() {
 	// make foursquare ajax call by first setting up the keys
-	var client_id = "FQU4MYIQZQST5PMMTIKXABRBGJHIWH5NLQXA2AWJ2S4KNWNB";
-	var client_secret = "NPJ45DX1AL1XUZAKHAFDAQZILKSS1VHJP54DLCUL3QHI0T3B";
+	var client_id = "YZOSJSSBJMVE2MKWJY51YHKMUEW3C4KBKSWGVTWOQMGPJBLC";
+	var client_secret = "KO4UFOOJ1V3CTJWIYPT1CTABD5GZRW11DASM1JG0RKLWOXAX";
 
 	// next set up the keywords (POI name) and latitude / longitude
 	var keywords = encodeURIComponent(globalName);
