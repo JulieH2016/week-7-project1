@@ -1,5 +1,5 @@
 -----------------------------------------
-# Oh, The Places You Will Go!
+# Oh, The Places We Will Go!
 
 #### Week 7 / Project 1
 #### UCF Coding Boot Camp - November/December 2016
@@ -12,7 +12,7 @@ Alberto Alvarez, Julie Hoffman, Shivam Parekh, Ali Zaidi
 https://fierce-coast-58198.herokuapp.com/
 
 #### Presentation Video:
-Coming soon...
+https://youtu.be/4bqbBu6nSDA
 
 #### Pre-research Notes:
 https://drive.google.com/open?id=1dlJ3GmrWDRWC7EmW3RzTrSD3K-IosCGNKTLzS_Ao840
